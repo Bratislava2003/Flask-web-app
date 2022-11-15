@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block body %}
+    <div class="mx-4">
+        <h2 class="border-bottom border-secondary border-3 ps-3 pt-3"
+        >Shop main page</h2>
+        {% if products %}
+            <h3>List of products</h3>
+            <ul class="list-group"></ul>
+                {% for product in products %}
+                    <a class="text-decoration-none"
+                       href="{{ url_for('shop_app.details', product_id=product.id)}}">
+                        {{product.name}}
+                    </a>
+        {% endif %}
+    </div>
+{% endblock %}
