@@ -39,7 +39,10 @@
     <connection id="90c02f0b-581f-4055-a5d3-0802c83e458d" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="90c02f0b-581f-4055-a5d3-0802c83e458d" dataset="public.users" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="90c02f0b-581f-4055-a5d3-0802c83e458d" dataset="public.alembic_version" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="90c02f0b-581f-4055-a5d3-0802c83e458d" dataset="public.posts" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="90c02f0b-581f-4055-a5d3-0802c83e458d" dataset="public.products" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="90c02f0b-581f-4055-a5d3-0802c83e458d" dataset="public.product" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

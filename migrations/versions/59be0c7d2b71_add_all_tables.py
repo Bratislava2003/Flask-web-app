@@ -1,8 +1,8 @@
-"""add_all
+"""add all tables
 
-Revision ID: a67126dd3241
+Revision ID: 59be0c7d2b71
 Revises: 
-Create Date: 2022-11-15 13:50:48.762529
+Create Date: 2022-11-15 18:22:15.204495
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a67126dd3241'
+revision = '59be0c7d2b71'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     sa.UniqueConstraint('name')
     )
     op.create_table('users',
-    sa.Column('id', sa.INTEGER(), autoincrement=False, nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_name', sa.String(), nullable=False),
     sa.Column('username', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
@@ -35,8 +35,8 @@ def upgrade():
     sa.UniqueConstraint('username')
     )
     op.create_table('posts',
-    sa.Column('id', sa.INTEGER(), autoincrement=True, nullable=False),
-    sa.Column('user_id', sa.INTEGER(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
     sa.Column('body', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
