@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{product.name}} on Flask-shop
+{% endblock %}
+
+{% block body %}
+    <div>
+        <h1  class="text-decoration-underline" style="text-align: center;">
+            {{product.name}}
+        </h1>
+        <p style="text-align: center;" class="mt-n3">
+            Unique id: {{product.id}}
+        </p>
+    </div>
+    <div class="ms-4">
+        <h2>
+            Specs:
+        </h2>
+        <ol class="ms-4">
+            <li>
+                Spec_1
+            </li>
+            <li>
+                Spec_2
+            </li>
+            <li>
+                Spec_3
+            </li>
+        </ol>
+        <h2>
+            Description:
+        </h2>
+            <p style="margin-left: 2.5em;">
+                Some text about product
+            </p>
+    </div>
+
+{% endblock %}

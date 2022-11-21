@@ -4,9 +4,11 @@ import db_cfg
 from views.shop import shop_app
 from models import db, User, Post
 from jsonapi.main import get_list
+from flask_login import LoginManager
 
 app = Flask(__name__)
-
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 app.config.update(
     SECRET_KEY="asdfasd",
@@ -44,6 +46,10 @@ def add_json_ph():
             db.session.add(post)
         db.session.commit()
 
+@login_manager.user_loader()
+def load_user(user_id):
+    pass
+
 
 @app.route('/', endpoint='index')
 def hello_world():
@@ -56,5 +62,4 @@ def text():
 
 
 if __name__ == '__main__':
-    add_json_ph()
-    app.run(debug=True)
+    app.run(debug=True, port=8080)

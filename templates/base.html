@@ -26,7 +26,8 @@
               {% for endpoint, label in [
                 ('index', 'Home'),
                 ('about', 'About'),
-                ('shop_app.home', 'Shop')
+                ('shop_app.home', 'Shop'),
+                ('shop_app.add', 'Add product')
                 ] %}
 
                 {% set path = url_for(endpoint) %}
@@ -49,6 +50,6 @@
     {% endblock %}
   </body>
   <footer>
-    <p class="mx-3"> &copy; Bruh inc., 2022</p>
+    <p class="ms-5 mt-5"> &copy; Bruh inc., 2022</p>
   </footer>
 </html>

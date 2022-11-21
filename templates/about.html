@@ -10,5 +10,12 @@
 
 
 {% block body %}
-    <p class="ps-3 pt-3">About</p>
+    <p class="ps-3 pt-3 fs-3">About</p>
+    <div>
+        <p>
+            This is a kitten 	&#8595;
+        </p>
+        <img src="{{url_for('static', filename='img-cat_small.jpeg')}}" class="img-fluid" alt="img-cat_small.jpeg"/>
+    </div>
 {% endblock %}
+
