@@ -10,10 +10,8 @@
           Base title
         {% endblock %}
     </title>
-
       {% block head %}
-        <style>
-        </style>
+
       {% endblock %}
   </head>
   <body>
@@ -26,8 +24,8 @@
               {% for endpoint, label in [
                 ('index', 'Home'),
                 ('about', 'About'),
-                ('shop_app.home', 'Shop'),
-                ('shop_app.add', 'Add product')
+                ('shop_app.home', 'Archive'),
+                ('blog_app.blog_home', 'Blog'),
                 ] %}
 
                 {% set path = url_for(endpoint) %}
@@ -38,18 +36,54 @@
                     {{ label }}
                   </a>
                 </li>
-              {% endfor %}
-              </li>
+                {% endfor %}
             </ul>
           </div>
+          {% if current_user.is_authenticated %}
+              <div class="nav-item position-relative">
+                <ul class="navbar-nav">
+                  <li class="nav-link">
+                      <a href="/blog/user/{{current_user.username}}" class="
+                       text-decoration-none
+                       position-absolute
+                       top-0
+                       end-100
+                       "
+                         style="color: #fff; text-align: center;">
+                        Hi, {{current_user.username}}!
+                      </a>
+                  </li>
+                  <li class="nav-link">
+                    <a type="button" class="btn btn-outline-secondary" href="{{url_for('logout')}}">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+          {% else %}
+              <div class="nav-item position-relative">
+                <ul class="navbar-nav">
+                  <li class="nav-link">
+                    <a class="btn btn-outline-success rounded-pill" href="{{url_for('login')}}">Login</a>
+                  </li>
+                  <li class="nav-link mt-1">
+                    or
+                  </li>
+                  <li class="nav-link">
+                    <a class="btn btn-outline-info rounded-pill" href="{{url_for('register')}}">Register</a>
+                  </li>
+                </ul>
+              </div>
+          {% endif %}
         </div>
       </nav>
     {% endblock %}
     {% block body %}
       Base body
     {% endblock %}
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
   </body>
   <footer>
-    <p class="ms-5 mt-5"> &copy; Bruh inc., 2022</p>
+    <p class="position-absolute bottom-0 end-0 me-5 mt-5"> &copy; Bruh inc., 2022</p>
   </footer>
 </html>

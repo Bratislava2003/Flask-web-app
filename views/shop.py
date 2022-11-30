@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash
+from flask import Blueprint, render_template, request, url_for, redirect
+from flask_login import login_required
 from models import db, Product
 from views.forms.prod_form import CreateProductForm
 
@@ -22,10 +23,22 @@ def get_product(product_id: int):
         product_id,
         f"Product #{product_id} not found! "
     )
-    return render_template("shop_details.html", product=product)
+    confirm_delete = request.endpoint == "products_app.confirm-delete"
+    if request.method == "GET":
+        return render_template("shop_details.html", product=product)
+
+    db.session.delete(product)
+    db.session.commit()
+
+    url = url_for("shop_app.home")
+    if confirm_delete:
+        return redirect('url')
+
+    return {"ok": True, "url": url}
 
 
 @shop_app.route("/add/", methods=["GET", "POST"], endpoint="add")
+@login_required
 def add_product():
 
     form = CreateProductForm()
@@ -37,11 +50,12 @@ def add_product():
         return render_template("shop_add.html", form=form), 400
 
     product_name = form.name.data
+    product_type = form.product_type.data
+    product_description = form.product_description.data
 
-    product = Product(name=product_name)
+    product = Product(name=product_name, prod_type=product_type, description=product_description)
     db.session.add(product)
     db.session.commit()
 
-    flash(f"Successfully added product {product.name}!")
     url = url_for("shop_app.details", product_id=product.id)
     return redirect(url)

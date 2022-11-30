@@ -10,12 +10,6 @@
     width: 40%
 }
 
-.custom-hover:hover {
-   line-height:1.5em;
-   width:55%;
-   background-color: #C8DFEE;
-}
-
 .hoe {
     margin-left: 0.2em;
 }
@@ -35,7 +29,7 @@
                    pb-1
                    hoe
 ">
-            Shop main page
+            Archive main page
         </h2>
         <div class="ms-5 mt-3">
             {% if products %}
@@ -60,6 +54,10 @@
                             {% endfor %}
                         </ol>
                     </div>
+            {% else %}
+            <h1>
+                Nothin' here yet!
+            </h1>
             {% endif %}
         </div>
     </div>

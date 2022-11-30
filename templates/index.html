@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<style>
+</style>
+
 {% endblock %}
 
 {% block title %}
@@ -9,5 +12,33 @@
 
 
 {% block body %}
-    <h1 class="ps-3 pt-3">This is main page</h1>
+    <div>
+        <h1 class="ps-3 pt-3" style="text-align: center;">This is main page</h1>
+    </div>
+    <div class="mt-4">
+        <h2 class="tc">Latest articles</h2>
+        <ul class="list-group" style="margin-right: 5em; margin-left: 5em;">
+            {% for article in articles %}
+            <li class="list-group-item">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        {{article.title}} by
+                        <a href="blog/user/{{article.user.username}}" class="text-decoration-none">
+                            {{article.user.username}}
+                        </a>
+                        {% if article.user.is_Admin == True %}
+                            <img class="mb-1" src="{{url_for('static', filename='check-mark_16.png')}}">
+                        {% endif %}
+                        <small class="position-absolute end-0 top-50">
+                            posted {{article.created_at}}
+                        </small>
+                    </li>
+                    <li class="list-group-item">
+                       <a class="text-decoration-none" href="blog/post/{{article.id}}">{{article.body[:15]}}...</a>
+                    </li>
+                </ul>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

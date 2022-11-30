@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{category}} category
+{% endblock %}
+
+{% block body %}
+    <div class="ms-5 mt-4">
+        <h1>Category: {{ category }}</h1>
+    </div>
+    <div class="list-group ms-5 mt-5" style="width:40%">
+        <ul>
+            {% for post in posts %}
+                    <li>
+                        <a href="{{ url_for('blog_app.post', post_id=post.id) }}" class="list-group-item d-flex justify-content-between align-items-start">
+                            <div>
+                                 Id: {{ post.id }} |
+                                {{ post.category }}
+                            </div>
+                            <div>
+                                {{ post.title }} |
+                                {{ post.body[:25] }}...
+                            </div>
+                        </a>
+                    </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

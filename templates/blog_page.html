@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{user.username}}'s page
+{% endblock %}
+
+{% block body %}
+    <div class="position-relative d-flex flex-row">
+        <div>
+            <h2 class="ms-3 mt-3">
+                {{user.username}}
+            </h2>
+        </div>
+        {% if user.is_Admin == True %}
+        <div class="ms-2 pt-4">
+            <img src="{{url_for('static', filename='check-mark_16.png')}}">
+        </div>
+        {% endif %}
+        {% if current_user.is_Admin == True %}
+        <div class="ms-2 pt-3">
+            <button type="button"
+                    class="btn btn-sm btn-danger my-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#delete-product-modal">
+                Delete user
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <div>
+            <div class="position-absolute ms-5">
+                {% if current_user.username == user.username %}
+                    <h3>
+                        My posts
+                    </h3>
+                {% else %}
+                    <h3>
+                        Latest posts:
+                    </h3>
+                {% endif %}
+                <ul>
+                    {% for post in user.posts[:4] %}
+                            <a href="{{url_for('blog_app.post', post_id=post.id)}}"
+                                class="list-group-item d-flex justify-content-between align-items-start">
+                                Title: {{post.title}} |
+                                {{post.created_at}}
+                            </a>
+                            {% if current_user.username == user.username %}
+                            {% endif %}
+                    {% endfor %}
+                    <li>
+                        <a href="{{ url_for('blog_app.user_posts', username=user.username) }}"
+                           class="text-decoration-none btn btn-outline-primary mt-3">
+                            Watch all posts
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% if current_user.is_authenticated and current_user.username == user.username %}
+            <div class="position-absolute end-0 me-5 border border-4 rounded-3" style="border-color: #F27489!important;">
+                <div>
+                    <h4 class="ms-4">
+                        Menu:
+                    </h4>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <a href="{{ url_for('blog_app.postcr') }}" class="btn btn-outline-primary me-4">Create new post</a>
+                        </li>
+                        {% if current_user.is_Admin == True %}
+                        <li>
+                            <a href="{{ url_for('shop_app.add') }}" class="btn btn-outline-primary me-4 mt-3">Add product</a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('blog_app.admin') }}" class="btn btn-outline-primary me-4 mt-3">Admin panel</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+          <div
+        class="modal fade"
+        id="delete-product-modal"
+        tabindex="-1"
+        aria-labelledby="delete-product-modal-label"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="delete-product-modal-label">
+            Delete product #{{ user.username }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <h2>Delete product {{ user.username }}?</h2>
+          <p>Are you sure you want to delete product <code>{{ user.username }}</code>?</p>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal">
+            Close
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-danger"
+            {# data-bs-toggle="modal" #}
+            onclick="handleDeleteProduct()"
+            id="btn-confirm-delete"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/prod-delete.js') }}">
+  </script>
+  <script>
+    function handleDeleteProduct() {
+      sendDeleteRequest(window.location.href, function (data) {
+        console.log('success!', data);
+        window.location.href = data.url || '/';
+      })
+    }
+  </script>
+{% endblock %}

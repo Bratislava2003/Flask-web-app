@@ -5,15 +5,26 @@
 {% endblock %}
 
 {% block title %}
-    About page
+    Flask - About
 {% endblock %}
 
 
 {% block body %}
-    <p class="ps-3 pt-3 fs-3">About</p>
-    <div>
+    <h2 class="ps-3 pt-3 fs-3">About</h2>
+    <div class="mx-5">
         <p>
-            This is a kitten 	&#8595;
+            Hi and welcome to this site! This is PC-themed blog and archive of different pc parts, so u can learn more about PC's and share
+            your vision on some topics related to this theme.
+        </p>
+        <p>
+            It is worth mentioning, that this service is unfinished and there'll be lots of new feature such as comments,
+            advanced archive system, complete new educational section, where u can learn how to do PC-related things properly.
+        </p>
+        <p>
+            So, hope you support this project by some activity and giving feedback on problems and features.
+        </p>
+        <p>
+            Hey, there's cat 4 ya ;)
         </p>
         <img src="{{url_for('static', filename='img-cat_small.jpeg')}}" class="img-fluid" alt="img-cat_small.jpeg"/>
     </div>

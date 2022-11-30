@@ -1,44 +1,52 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{product.name}} on Flask-shop
+    {{ post.title }} on Flask
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h1  class="text-decoration-underline" style="text-align: center;">
-            {{product.name}}
-        </h1>
-        <p style="text-align: center;" class="mt-n3">
-            Type: {{product.prod_type}} Unique id: {{product.id}}
-        </p>
-    </div>
-    <div class="ms-4">
-            <p style="margin-left: 2.5em;">
-                {{product.description}}
-            </p>
-    </div>
-
+    <ul>
+        <li>
+            <h1>
+                {{ post.title }}
+            </h1>
+        </li>
+        <li>
+            <small>
+                Post id:{{ post.id }}
+            </small>
+        </li>
+        <li>
+            <small>
+            Category: {{ post.category }}
+            </small>
+        </li>
+        <li class="mt-5 position-relative d-flex justify-content-center">
+            <div class="list-group-item w-50">
+                {{ post.body }}
+            </div>
+        </li>
+    </ul>
     <button
         type="button"
-        class="btn btn-sm btn-danger my-2"
+        class="btn btn-sm btn-outline-danger my-2 ms-4"
         data-bs-toggle="modal"
         data-bs-target="#delete-product-modal">
-        Delete product (with modal)
+        Delete post
     </button>
 
-      <div
-    class="modal fade"
-    id="delete-product-modal"
-    tabindex="-1"
-    aria-labelledby="delete-product-modal-label"
-    aria-hidden="true"
-  >
+    <div
+        class="modal fade"
+        id="delete-product-modal"
+        tabindex="-1"
+        aria-labelledby="delete-product-modal-label"
+        aria-hidden="true"
+    >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="delete-product-modal-label">
-            Delete product #{{ product.id }}</h5>
+            Delete post {{ post.title }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -47,8 +55,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <h2>Delete product {{ product.name }}?</h2>
-          <p>Are you sure you want to delete product <code>{{ product.name }}</code>?</p>
+          <h2>Delete post {{ post.title }}?</h2>
+          <p>Are you sure you want to delete post <code>{{ post.title }}</code>?</p>
         </div>
         <div class="modal-footer">
 

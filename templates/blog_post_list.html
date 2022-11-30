@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user.username }}'s posts
+{% endblock %}
+
+{% block body %}
+    <h1 class="ms-3 mt-4">
+        All {{ user.username }}'s posts:
+    </h1>
+        <ul class="list-group ms-5 mt-5" style="width:40%">
+            {% for post in posts %}
+                <a href="{{url_for('blog_app.post', post_id=post.id)}}" class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>
+                         Id: {{ post.id }} |
+                        {{ post.category }}
+                    </div>
+                    <div>
+                        {{ post.title }} |
+                        {{ post.body[:25] }}...
+                    </div>
+                </a>
+            {% endfor %}
+        </ul>
+
+{% endblock %}

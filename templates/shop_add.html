@@ -5,18 +5,27 @@
 {% endblock %}
 
 {% block body %}
-  <div>
+  <div class="mx-4">
     <h3>Create a new product</h3>
 
     <form method="post">
-      {#      <label for="id-name">Type the product name :</label>#}
-      {#      <input id="id-name" name="product-name" type="text">#}
 
       {{ form.hidden_tag() }}
+
+    <div>
       {{ form.name.label(class='form-label') }}
       {{ form.name(size=20, class='form-control, w-35') }}
+    </div>
+    <div>
+      {{ form.product_type.label(class='form-label') }}
+      {{ form.product_type(class='form-control, w-35') }}
+    </div>
+    <div>
+      {{ form.product_description.label(class='form-label') }}
+      {{ form.product_description(size=20, class='form-control, w-35') }}
+    </div>
 
-      {% if form.name.errors %}
+      {% if form.name.errors or form.product_type.errors or form.product_description.errors %}
         <ul class="errors">
           {% for error in form.name.errors %}
             <li>{{ error }}</li>

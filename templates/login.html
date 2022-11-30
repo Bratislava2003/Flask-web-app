@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if request.path == '/register/' %}
+    Registration on Flask
+    {% else %}
+    Login -- Flask
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if request.path == '/register/' %}
+    <div>
+        <h1 style="text-align: center;">
+            Registration on Flask
+        </h1>
+    </div>
+    <div>
+        <form method="post">
+            {# <label for="username">Enter username</label>#}
+            {# <input id="username" name="usernaeme" type="text">#}
+
+
+            {{ form.hidden_tag() }}
+            <ul>
+                <li>
+                    <div>
+                    {{ form.username.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.username(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+                <li>
+                    <div>
+                    {{ form.email.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.email(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+                <li>
+                    <div>
+                    {{ form.password.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.password(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+                <li>
+                    <div>
+                    {{ form.validate_pass.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.validate_pass(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+            </ul>
+            <button
+                class="btn btn-outline-primary w-20"
+                style="margin-left: 2rem!important;"
+                type="submit">Register
+            </button>
+                    <ul class="errors">
+          {% for error in form.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        </form>
+    </div>
+    {% else %}
+            <div>
+        <h1 style="text-align: center;">
+            Log In on Flask
+        </h1>
+    </div>
+    <div>
+        <form method="post">
+            {# <label for="username">Enter username</label>#}
+            {# <input id="username" name="username" type="text">#}
+
+            {{ form.hidden_tag() }}
+            <ul>
+                <li>
+                    <div>
+                    {{ form.email.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.email(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+                <li>
+                    <div>
+                    {{ form.password.label(class='form-label') }}
+                    </div>
+                    <div>
+                    {{ form.password(size=20, class='form-control, w-35, border-none') }}
+                    </div>
+                </li>
+            </ul>
+            <button
+                class="btn btn-outline-primary w-20"
+                type="submit"
+                style="margin-left: 2rem!important;"
+                >Log In
+            </button>
+                    <ul class="errors">
+          {% for error in form.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        </form>
+    </div>
+    {% endif %}
+{% endblock %}
