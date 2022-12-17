@@ -72,6 +72,7 @@ def register():
         new_user = User(username=var_username, email=var_email, pwd=var_pwd)  # type: ignore
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for('index'))
 
     return render_template("login.html", form=form)
